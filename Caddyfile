@@ -1,0 +1,19 @@
+{$DOMAIN}, :{$HTTP_PORT} {
+    redir /aria2 /aria2/ 301
+    proxy /aria2/ aria2:80 {
+        transparent
+        without /aria2
+    }
+    proxy /jsonrpc aria2:6800 {
+        transparent
+    }
+    proxy / nextcloud:80 {
+        transparent
+    }
+    tls {
+        dns dnspod
+    }
+    gzip
+    log stdout
+    errors stdout
+}
